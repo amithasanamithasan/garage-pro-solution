@@ -1,3 +1,4 @@
+"use client";
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -5,6 +6,17 @@ import { FaFacebook, FaGithub } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 
 const page = () => {
+const handleSignUp = async (event)=>{
+
+  event.preventDefault();
+ const newuser = {
+  name: event.target.name.value,
+  email: event.target.email.value,
+  password: event.target.password.value,
+ }
+ console.log(newuser);
+}
+
   return (
     <div className="container px-6 md:px-24 mx-auto py-12 md:py-24">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
@@ -25,7 +37,7 @@ const page = () => {
           <h6 className="text-2xl md:text-3xl font-semibold text-primary text-center mb-6 md:mb-12">
             Sign Up
           </h6>
-          <form action="">
+          <form onSubmit={handleSignUp} action="">
             <label htmlFor="name" className="block ">Name</label>
             <input
               type="text"
