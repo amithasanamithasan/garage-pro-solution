@@ -1,6 +1,6 @@
 "use client";
 
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { CiSearch} from "react-icons/ci";
@@ -64,7 +64,13 @@ console.log(session);
      <CiShoppingCart  className="text-2xl hover:text-cyan-500" />
           <CiSearch className="text-2xl hover:text-cyan-500"/>
           <a className="btn btn-outline btn-primary px-6">APPOINTMENT</a>
-          <Link href="/login" className="btn btn-primary px-8">Login</Link>
+          {
+          !session.data ? (
+    <Link href="/login" className="btn btn-primary px-8">Login</Link>
+      ) : (
+    <button className="btn btn-primary px-8" onClick={() => signOut()}>LOGOUT</button>
+     )}
+         
      </div>
         </div>
       </div>
@@ -75,23 +81,23 @@ console.log(session);
 const navItem = [
   {
   title:"Home",
-  path: '/'
+  path: '/',
  },
  {
   title:"About",
-  path: '/about'
+  path: '/about',
  },
  {
   title:"Services",
-  path: '/services'
+  path: '/services',
  },
  {
   title:"Contact",
-  path: '/contact'
+  path: '/contact',
  },
  {
   title:"Blog",
-  path: '/blog'
+  path: '/blog',
  }
  
 

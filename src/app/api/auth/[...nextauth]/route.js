@@ -62,28 +62,32 @@ const handler = NextAuth({
         },
         async authorize(credentials) {
           const { email, password } = credentials;
+
+          // Ensure both email and password exist
           if (!email || !password) {
             return null;
           }
           const db = await connectDB();
-          const currentUser = await db.collection("users").findOne({ email });
-          if (!currentUser) {
+          const currenUser = await db.collection('users').findOne({ email });
+          if (!currenUser) {
             return null;
           }
-          const passwordMatched = bcrypt.compareSync(
-            password,
-            currentUser.password
-          );
+        
+          const passwordMatched = bcrypt.compareSync(password, currenUser.password);
           if (!passwordMatched) {
             return null;
           }
-          return currentUser;
+          return {
+            id: currenUser._id.toString(),
+            email: currenUser.email,
+            name: currenUser.name,
+          };
         },
       }),
      
       
     ],
-    callbacks: {},
+
     pages: {
       signIn: "/login",
   
