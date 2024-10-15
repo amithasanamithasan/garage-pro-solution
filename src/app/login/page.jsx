@@ -7,6 +7,7 @@ import { FcGoogle } from "react-icons/fc";
 import { FaGithub, FaFacebook } from "react-icons/fa";
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation'; // Correct import for useRouter
+import SocialSignin from '@/components/Shared/SocialSignin';
 
 const LoginPage = () => { // Updated component name to be uppercase
 
@@ -78,11 +79,7 @@ const LoginPage = () => { // Updated component name to be uppercase
 
           <div className="text-center mt-6 md:mt-12">
             <h6 className=' text2xl md:text-3xl'>or sign in with</h6>
-            <div className='flex items-center justify-center space-x-4 text-4xl md:text-5xl'>
-              <FcGoogle />
-              <FaGithub />
-              <FaFacebook />
-            </div>
+          <SocialSignin></SocialSignin>
             <h6 className="mt-6 text-teal-800">
               Dont have an account?{" "}
               <Link className="text-2xl md:text-3xl text-primary font-semibold" href="/signup">

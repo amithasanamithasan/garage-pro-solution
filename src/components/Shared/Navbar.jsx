@@ -64,6 +64,9 @@ console.log(session);
      <CiShoppingCart  className="text-2xl hover:text-cyan-500" />
           <CiSearch className="text-2xl hover:text-cyan-500"/>
           <a className="btn btn-outline btn-primary px-6">APPOINTMENT</a>
+          { session?.status === 'loading' &&
+            <h6>Loading....</h6>
+            }
           {
           !session.data ? (
     <Link href="/login" className="btn btn-primary px-8">Login</Link>

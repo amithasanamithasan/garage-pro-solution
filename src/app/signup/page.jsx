@@ -1,4 +1,5 @@
 "use client";
+import SocialSignin from '@/components/Shared/SocialSignin';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -83,13 +84,9 @@ event.target.reset()
             </button>
           </form>
           
-          <div className="text-center mt-6 md:mt-12">
+          <div className="text-center mt-6 md:mt-12 ">
             <h6 className='text-2xl md:text-3xl'>or sign in with</h6>
-            <div className='flex items-center justify-center space-x-4 text-4xl md:text-5xl'>
-            <FcGoogle/>
-            <FaGithub/>
-            <FaFacebook/>
-            </div>
+           <SocialSignin></SocialSignin>
             <h6 className="mt-6 text-teal-800 ">
               Already have an account?{" "}
                <Link className="text-2xl md:text-3xl text-primary font-semibold" href={"/login"}>
