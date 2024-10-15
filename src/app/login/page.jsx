@@ -1,10 +1,32 @@
+"use client";
+
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+
+
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
+import { signIn } from 'next-auth/react';
+
+
 const page = () => {
+
+  const handleLogin = async (event)=>{
+    event.preventDefault();
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+
+    const resp = await signIn("credentials",{
+      email,
+      password,
+      redirect:true,
+    })
+console.log(resp);
+  };
+
+
   return (
     <div className="container px-6 md:px-24 mx-auto py-12 md:py-24">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
@@ -25,7 +47,7 @@ const page = () => {
           <h6 className="text-2xl md:text-3xl font-semibold text-primary text-center mb-6 md:mb-12">
             Sign In
           </h6>
-          <form>
+          <form  onSubmit={handleLogin}>
             <label htmlFor="email" className="block">Email</label>
             <input
               type="text"
@@ -44,7 +66,7 @@ const page = () => {
               type="submit"
               className="w-full btn btn-primary mt-8 md:mt-12 text-lg"
             >
-              Sign In
+              Sign_In
             </button>
           </form>
           

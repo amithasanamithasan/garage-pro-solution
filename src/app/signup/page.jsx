@@ -6,6 +6,7 @@ import { FaFacebook, FaGithub } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 
 const page = () => {
+  
 const handleSignUp = async (event)=>{
 
   event.preventDefault();
@@ -14,7 +15,19 @@ const handleSignUp = async (event)=>{
   email: event.target.email.value,
   password: event.target.password.value,
  }
- console.log(newuser);
+//  console.log(newuser);
+const resp =await fetch('http://localhost:3000/signup/api',{
+  method:'POST',
+  body: JSON.stringify(newuser),
+  headers:{
+    "content-type":"application/json"
+  }
+})
+// console.log(resp);
+if(resp.status === 200){
+event.target.reset()
+}
+
 }
 
   return (
