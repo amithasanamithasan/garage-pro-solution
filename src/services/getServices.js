@@ -10,7 +10,7 @@
 
   export const getServicesDetails = async(id)=>{
 
-    const res = await fetch(`http://localhost:3000/service/api/getall${id}`)
+    const res = await fetch(`http://localhost:3000/service/api/${id}`)
     const service= res.json();
   
     return service;
