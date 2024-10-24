@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 
 
@@ -26,7 +27,7 @@ const ServiceCard = ({service}) => {
     {/* <p className="text-2xl  ">{description}</p> */}
     <div className="card-actions justify-between items-center">
             <h6 className="text-3xl md:text-3xl bg-slate-400 rounded text-black font-semibold">Price : ${price}</h6>
-          <button className="btn btn-primary  text-xl md:text-xl">BY NOW</button>
+          <Link href={`/service/${_id}`}><button className="btn btn-primary  text-xl md:text-xl">View Details</button></Link>
         </div>
   </div>
 </div>

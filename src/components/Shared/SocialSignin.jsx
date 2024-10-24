@@ -2,8 +2,6 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
-
-
 import { FaFacebook, FaGithub } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 
