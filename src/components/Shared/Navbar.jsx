@@ -9,6 +9,31 @@ const Navbar = () => {
 
   const session = useSession()
 console.log(session);
+const navItem = [
+  {
+  title:"Home",
+  path: '/',
+ },
+ {
+  title:"About",
+  path: '/about',
+ },
+ {
+  title:"Services",
+  path: '/services',
+ },
+ {
+  title:"Contact",
+  path: '/contact',
+ },
+ {
+  title:"Blog",
+  path: '/blog',
+ }
+ 
+
+
+]
     return (
      <div className="bg-[#bcc6bb] text-slate-900 ">
          <div className="navbar  container mx-auto  overflow-auto">
@@ -81,30 +106,6 @@ console.log(session);
     );
 };
 
-const navItem = [
-  {
-  title:"Home",
-  path: '/',
- },
- {
-  title:"About",
-  path: '/about',
- },
- {
-  title:"Services",
-  path: '/services',
- },
- {
-  title:"Contact",
-  path: '/contact',
- },
- {
-  title:"Blog",
-  path: '/blog',
- }
- 
 
-
-]
 
 export default Navbar;

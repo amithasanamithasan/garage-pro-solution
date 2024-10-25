@@ -1,5 +1,6 @@
 
 
+import Footer from '@/components/Shared/Footer';
 import { getServicesDetails } from '@/services/getServices';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -247,6 +248,7 @@ Battery Charge
 
 </div>
 <p className="mt-4 text-center text-green-500">Video is playing...</p>
+<Footer></Footer>
 </div>
 
 );
