@@ -23,6 +23,28 @@ const  Chackoutpage =  ({params}) => {
 
 const handleBooking=async (event)=>{
     event.preventDefault()
+const newbooking ={
+ name:data?.user?.name,
+ email:data?.user?.email,
+ phone : event.target.phone.value,
+ address: event.target.address.value,
+date : event.target.date.value,
+ serviceTitel:title,
+ price: price,
+
+}
+  
+const resp= await fetch('http://localhost:3000/checkout/api/newbooking',{
+
+    method:'POST',
+    body: JSON.stringify(newbooking),
+    headers:{
+    'content-type': 'application/json'
+    }
+
+})
+console.log(resp);
+
 
 }
 useEffect(()=>{
@@ -55,7 +77,10 @@ useEffect(()=>{
                 <label className="label">
                   <span className="label-text">Name</span>
                 </label>
-                <input  defaultValue={data?.user?.name}  type="text" name="name" className="input input-bordered" />
+             <input  defaultValue={data?.user?.name} 
+              type="text" 
+              name="name" 
+              className="input input-bordered" />
               </div>
               <div className="form-control">
   <label className="label">
