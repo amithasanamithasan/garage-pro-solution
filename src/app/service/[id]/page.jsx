@@ -18,7 +18,7 @@ const { _id, title, description, img, price, facility } = details.service;
 return (
 <div className="w-11/12 mx-auto ">
 {/* Header */}
-<div className="relative h-72  py-0">
+<div className="container mx-auto   relative h-72  py-0">
 <Image
         className=" h-72 w-full  rounded-lg"
         src={img} 
@@ -28,7 +28,7 @@ return (
         style={{ width: '100vw', height: '20vw' }}
     />
 <div className="absolute h-full left-0 top-0 flex items-center justify-center bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)]">
-        <h1 className="text-white text-3xl font-bold flex justify-center items-center ml-8">
+        <h1 className="text-cyan-400 text-2xl  md:text-4xl font-bold flex justify-center items-center ml-8">
             Details of {title}
         </h1>
     </div>
@@ -171,7 +171,7 @@ Battery Charge
 </div>
 </div>
 
-<h1 class="text-center text-2xl font-bold">Car Doctor</h1>
+<h1 class="text-center text-2xl font-bold">Garage Pro Solution </h1>
 <p class="text-center text-sm mt-2">Need Help? We Are Here To Help You</p>
 
 
