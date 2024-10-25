@@ -23,6 +23,10 @@ const navItem = [
   path: '/services',
  },
  {
+  title:"My Bookings",
+  path: '/mybooking',
+ },
+ {
   title:"Contact",
   path: '/contact',
  },
@@ -69,8 +73,8 @@ const navItem = [
           </div>  */}
 
 
-         <Link href="/">
-  <Image alt="logo" src="/assets/logo.svg" height={60} width={80} />
+<Link href="/">
+  <Image className="rounded-full" alt="logo" src="/assets/logo.webp" height={60} width={80} />
 </Link>
         
         </div>
