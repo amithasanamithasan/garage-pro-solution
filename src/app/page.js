@@ -1,15 +1,10 @@
-
-
-
 import Homepage from "@/components/Homepage/Homepage";
-import Image from "next/image";
-
 
 export default function Home() {
   return (
   
-      <main className=" h-screen">
-     
+      <main className=" h-screen bg-slate-400">
+   
 <Homepage></Homepage>
         </main>
       

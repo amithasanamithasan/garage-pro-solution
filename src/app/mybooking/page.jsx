@@ -1,7 +1,10 @@
 "use client";
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+
 
 const page = () => {
 const session = useSession();
@@ -14,6 +17,21 @@ const bookingdata= async()=>{
     setBooking (data.mybookings)
 
 }
+
+const handleDelete = async (id) => {
+  const deleted = await fetch(
+    `http://localhost:3000/mybooking/api/deletebooking/${id}`, {
+      method : "DELETE",
+    }
+  );
+  const resp = await deleted.json();
+  if(resp?.response?.deletedCount >  0) {
+    toast.warning(resp?.message)
+    bookingdata();
+  }
+};
+
+ 
 useEffect(()=>{
     bookingdata()
 },[session]);
@@ -21,6 +39,7 @@ useEffect(()=>{
 
     return (
         <div class="overflow-x-auto">
+          <ToastContainer />
             <div className="container mx-auto   relative h-72  py-0">
 <Image
         className=" h-72 w-full  rounded-lg"
@@ -50,13 +69,14 @@ useEffect(()=>{
               <th>Price</th>
               <th>Address</th>
               <th>BookingDate</th>
+              <th>Phone</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
    
           {
-            booking.map(({serviceTitel,_id,date,address,price})=>  
+            booking.map(({serviceTitel,_id,date,phone,address,price})=>(  
             <tr key={_id}>
             <th>
               <label>
@@ -74,16 +94,18 @@ useEffect(()=>{
             </td>
             <td>
             {price}
+          
               <br />
               <span class="badge badge-ghost badge-sm"></span>
             </td>
             <td>{address}</td>
             <td>{date}</td>
+            <td>{phone}</td>
             <th className='space-x-3'>
-              <button class="btn btn-ghost ">EDIT</button>
-              <button class="btn btn-primary ">DELETE</button>
+            <Link href={`/mybooking/updatebooking/${_id}`}>  <button class="btn btn-ghost ">EDIT</button></Link>
+              <button onClick={() => handleDelete(_id)} class="btn btn-primary ">DELETE</button>
             </th>
-          </tr>)
+          </tr>))
           }
          
           </tbody>

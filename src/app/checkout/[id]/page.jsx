@@ -3,12 +3,14 @@ import Footer from '@/components/Shared/Footer';
 import { getServicesDetails } from '@/services/getServices';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
+import React, { useEffect, useState } from 'react';
+import { ToastContainer, toast } from "react-toastify";
 const  Chackoutpage =  ({params}) => {
 
     const [chackservice,setCheckservice]=useState({});
-
+    const router = useRouter();
     const {data} = useSession()
 
     const checkservice = async ()=>{
@@ -43,18 +45,25 @@ const resp= await fetch('http://localhost:3000/checkout/api/newbooking',{
     }
 
 })
-console.log(resp);
+const response =await resp?.json()
+toast.success(response?.message)
+
+setTimeout(() => {
+  router.push('/mybooking'); // Redirect to the booking page
+}, 1000); // Adjust delay (2 seconds) if necessary
+event.target.reset();
 
 
 }
 useEffect(()=>{
+  toast.success("Test notification");
     checkservice()
 },[params])
 
     return (
    
         <div className="container mx-auto">
-
+       <ToastContainer />
         <div className="relative  h-72">
           <Image
             className="absolute h-72 w-full left-0 top-0 object-cover"
@@ -152,6 +161,7 @@ useEffect(()=>{
          
         </div>
         <Footer></Footer>
+       
       </div>
 
     );

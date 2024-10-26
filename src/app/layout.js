@@ -2,8 +2,8 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "@/components/Shared/Navbar";
 import AuthProvider from "@/authservices/AuthProvider";
-import Footer from "@/components/Shared/Footer";
-
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -29,13 +29,15 @@ export default function RootLayout({ children }) {
     <html lang="en" data-theme="carDoctorTheme">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        > 
+      >
+    
         <AuthProvider>
-      <Navbar/>
-    
-        {children}
-    
-      </AuthProvider>
+
+          <Navbar />
+
+          {children}
+
+        </AuthProvider>
       </body>
     </html>
   );
