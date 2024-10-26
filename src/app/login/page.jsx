@@ -6,13 +6,14 @@ import React from 'react';
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub, FaFacebook } from "react-icons/fa";
 import { signIn } from 'next-auth/react';
-import { useRouter } from 'next/navigation'; // Correct import for useRouter
+import { useRouter, useSearchParams } from 'next/navigation'; // Correct import for useRouter
 import SocialSignin from '@/components/Shared/SocialSignin';
 
 const LoginPage = () => { // Updated component name to be uppercase
 
   const router = useRouter();
-
+ const searchParams= useSearchParams();
+ const path = searchParams.get('redirect')
   const handleLogin = async (event) => {
     event.preventDefault();
     
@@ -22,7 +23,8 @@ const LoginPage = () => { // Updated component name to be uppercase
     const resp = await signIn("credentials", {
       email,
       password,
-      redirect: false,  // Use redirect: false for debugging
+      redirect: true,  // Use redirect: pathname 
+     callbackUrl:path ? path : '/',
     });
   
     // Log the response

@@ -2,11 +2,13 @@
 import SocialSignin from '@/components/Shared/SocialSignin';
 import Image from 'next/image';
 import Link from 'next/link';
+import { redirect, useSearchParams } from 'next/navigation';
 import React from 'react';
 import { FaFacebook, FaGithub } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 
-const page = () => {
+const signuppage = () => {
+  
   
 const handleSignUp = async (event)=>{
 
@@ -15,6 +17,7 @@ const handleSignUp = async (event)=>{
   name: event.target.name.value,
   email: event.target.email.value,
   password: event.target.password.value,
+ 
  }
 //  console.log(newuser);
 const resp =await fetch('http://localhost:3000/signup/api',{
@@ -100,5 +103,5 @@ event.target.reset()
   );
 };
 
-export default page;
+export default signuppage;
 

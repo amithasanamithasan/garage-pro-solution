@@ -1,4 +1,5 @@
 import { connectDB } from "@/lib/connectDB"
+import { NextResponse } from "next/server";
 
 
 export const GET = async ()=>{
@@ -10,7 +11,7 @@ export const GET = async ()=>{
     try {
 
         const services =await serviceCollection.find().toArray();
-        return Response.json({services})
+        return NextResponse.json({services})
     } catch (error) {
 
         console.log(error);

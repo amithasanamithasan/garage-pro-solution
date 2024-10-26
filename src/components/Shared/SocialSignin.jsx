@@ -1,17 +1,24 @@
 "use client";
 import React from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 import { FaFacebook, FaGithub } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 
 const SocialSignin = () => {
-
+  const searchParams= useSearchParams();
+  const path=searchParams.get('redirect')
     const router = useRouter();
 
     const handelSocialLogin = async (provider  )=>{
 
-const resp =await signIn(provider ,  { callbackUrl: '/' })
+const resp =await signIn(provider ,  
+  { callbackUrl: '/' ,
+    redirect:true,
+    callbackUrl:path ? path : '/',
+  }
+
+)
 
 if (resp?.status === 200) {
     router.push('/');
