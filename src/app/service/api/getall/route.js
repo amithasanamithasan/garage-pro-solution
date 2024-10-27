@@ -14,7 +14,8 @@ export const GET = async ()=>{
         return NextResponse.json({services})
     } catch (error) {
 
-        console.log(error);
+       
+        return NextResponse.json({message:'data not found',error})
         
     }
 

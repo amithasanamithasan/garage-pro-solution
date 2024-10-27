@@ -1,4 +1,5 @@
 import { connectDB } from "@/lib/connectDB"
+import { NextResponse } from "next/server"
 
 export const POST = async(request)=>{
     const booking =await request.json()
@@ -10,10 +11,10 @@ export const POST = async(request)=>{
     try {
 
         const NewBooking =await bookingCollection.insertOne(booking);
-        return Response.json({message: 'Services Booking Succcessfully '})
+        return NextResponse.json({message: 'Services Booking Succcessfully '})
     } catch (error) {
 
-        console.log(error);
+        return NextResponse.json({message: 'Services not found '})
         
     }
 
