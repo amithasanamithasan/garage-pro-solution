@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { Suspense } from 'react'; // Import Suspense from React
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub, FaFacebook } from "react-icons/fa";
 import { signIn } from 'next-auth/react';
@@ -10,43 +10,46 @@ import { useRouter, useSearchParams } from 'next/navigation'; // Correct import 
 import SocialSignin from '@/components/Shared/SocialSignin';
 
 const LoginPage = () => { // Updated component name to be uppercase
-
   const router = useRouter();
- const searchParams= useSearchParams();
- const path = searchParams.get('redirect')
- const handleLogin = async (event) => {
-  event.preventDefault();
+  const searchParams = useSearchParams();
+  const path = searchParams?.get('redirect'); // Safely access query parameter
+  
+  const handleLogin = async (event) => {
+    event.preventDefault();
 
-  const email = event.target.email.value;
-  const password = event.target.password.value;
+    const email = event.target.email.value;
+    const password = event.target.password.value;
 
-  try {
-    const response = await signIn("credentials", {
+    const resp = await signIn("credentials", {
       email,
       password,
-      redirect: true, // This should handle the redirection
-      callbackUrl: path ? path : '/', // Fallback to homepage if no redirect path
+      redirect: true,  // Use redirect: pathname 
+      callbackUrl: path ? path : '/',
     });
 
     // Log the response
-    console.log('SignIn Response:', response);
-  } catch (error) {
-    console.error('Login failed:', error);
-  }
-};
+    console.log('SignIn Response:', resp);
+
+    if (resp?.status === 200) {
+      router.push('/');
+    } else {
+      console.log('Login failed:', resp?.error);
+    }
+  };
+
   return (
     <div className="container px-6 md:px-24 mx-auto py-12 md:py-24">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
 
         {/* Image Section */}
         <div className="flex justify-center md:justify-start">
-        <Image
-  src="/assets/images/login/login.svg"
-  height={400}
-  width={400}
-  alt="login image"
-  className="w-full h-auto max-w-xs md:max-w-md"
-/>
+          <Image
+            src="/assets/images/login/login.svg"
+            height={400}
+            width={400}
+            alt="login image"
+            className="w-full h-auto max-w-xs md:max-w-md"
+          />
         </div>
 
         {/* Form Section */}
@@ -78,8 +81,8 @@ const LoginPage = () => { // Updated component name to be uppercase
           </form>
 
           <div className="text-center mt-6 md:mt-12">
-            <h6 className=' text2xl md:text-3xl'>or sign in with</h6>
-          <SocialSignin></SocialSignin>
+            <h6 className='text-2xl md:text-3xl'>or sign in with</h6>
+            <SocialSignin />
             <h6 className="mt-6 text-teal-800">
               Dont have an account?{" "}
               <Link className="text-2xl md:text-3xl text-primary font-semibold" href="/signup">
@@ -93,4 +96,12 @@ const LoginPage = () => { // Updated component name to be uppercase
   );
 };
 
-export default LoginPage;
+const LoginPageWrapper = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LoginPage />
+    </Suspense>
+  );
+};
+
+export default LoginPageWrapper;

@@ -3,7 +3,8 @@ import SocialSignin from '@/components/Shared/SocialSignin';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { Suspense } from 'react'; // Import Suspense
-
+import { FaFacebook, FaGithub } from 'react-icons/fa';
+import { FcGoogle } from 'react-icons/fc';
 
 const SignupPage = () => {
 
@@ -83,7 +84,7 @@ const SignupPage = () => {
 
           <div className="text-center mt-6 md:mt-12">
             <h6 className='text-2xl md:text-3xl'>or sign in with</h6>
-            <SocialSignin/>
+            <SocialSignin />
             <h6 className="mt-6 text-teal-800">
               Already have an account?{" "}
               <Link className="text-2xl md:text-3xl text-primary font-semibold" href="/login">
@@ -97,5 +98,12 @@ const SignupPage = () => {
   );
 };
 
-export default SignupPage;
+const SignupPageWrapper = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SignupPage />
+    </Suspense>
+  );
+};
 
+export default SignupPageWrapper;
