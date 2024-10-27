@@ -1,41 +1,42 @@
 "use client"; 
 import React from 'react';
-
+import { RiTeamFill } from "react-icons/ri";
+import { TbTruckDelivery } from "react-icons/tb";
+import { FcOnlineSupport } from "react-icons/fc";
+import { FaGears } from "react-icons/fa6";
+import { SiAdguard } from "react-icons/si";
+import { CiDeliveryTruck } from "react-icons/ci";
+const features = [
+  { icon: <RiTeamFill className='text-3xl md:text-5xl'/> , title: 'Expert Team' },
+  { icon: <TbTruckDelivery  className='text-3xl md:text-5xl'/>, title: 'Timely Delivery', highlight: true },
+  { icon: <FcOnlineSupport className='text-3xl md:text-5xl' />, title: '24/7 Support' },
+  { icon: <FaGears className='text-3xl md:text-5xl' />, title: 'Best Equipment' },
+  { icon: <SiAdguard className='text-3xl md:text-5xl'/>, title: '100% Guarantee' },
+  { icon: <CiDeliveryTruck className='text-3xl md:text-5xl'/>, title: 'Timely Delivery' },
+];
 const CoreFeatures = () => {
-    const features = [
-        { id: 1, title: "Expert Team", icon: "👥", active: false },
-        { id: 2, title: "Timely Delivery", icon: "⏰", active: true },
-        { id: 3, title: "24/7 Support", icon: "🎧", active: false },
-        { id: 4, title: "Best Equipment", icon: "🔧", active: false },
-        { id: 5, title: "100% Guarantee", icon: "✅", active: false },
-        { id: 6, title: "Timely Delivery", icon: "📦", active: false },
-      ];
-      const handleClick = (title) => {
-        console.log(`${title} clicked`);
-      };
+   
     return (
-        <div className="max-w-screen-lg mx-auto p-6 text-center">
-        <h2 className="text-lg font-semibold text-red-500 uppercase mb-2">Core Features</h2>
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">Why Choose Us</h1>
-        <p className="text-gray-500 max-w-lg mx-auto mb-8">
-          The Majority Have Suffered Alteration In Some Form, By Injected Humour, Or Randomised Words Which Don’t Look Even Slightly Believable.
-        </p>
-  
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
-          {features.map((feature) => (
-            <div
-              key={feature.id}
-              onClick={() => handleClick(feature.title)}
-              className={`flex flex-col items-center p-4 rounded-lg border cursor-pointer ${
-                feature.active ? 'bg-red-500 text-white' : 'bg-white text-gray-800'
-              } shadow-sm hover:shadow-lg transition-shadow duration-200`}
-            >
-              <div className="text-3xl mb-2">{feature.icon}</div>
-              <h3 className={`font-medium ${feature.active ? 'text-white' : 'text-gray-800'}`}>{feature.title}</h3>
+      <section className="text-center py-12 bg-white">
+      <h2 className="text-sm font-semibold text-orange-500 mb-1">Core Features</h2>
+      <h3 className="text-2xl font-bold mb-4">Why Choose Us</h3>
+      <p className="text-gray-500 max-w-md mx-auto mb-8">
+        The majority have suffered alteration in some form, by injected humour, or randomised words which don’t look even slightly believable.
+      </p>
+      <div className="flex flex-wrap justify-center gap-4">
+        {features.map((feature, index) => (
+          <div
+            key={index}
+            className={`flex flex-col items-center w-32 p-4 rounded-lg ${feature.highlight ? 'bg-orange-500 text-white' : 'bg-gray-100 text-gray-800'}`}
+          >
+            <div className="w-10 h-10 mb-2">
+              {feature.icon}
             </div>
-          ))}
-        </div>
+            <p className="text-sm font-medium">{feature.title}</p>
+          </div>
+        ))}
       </div>
+    </section>
     );
 };
 

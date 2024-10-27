@@ -3,113 +3,127 @@
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { CiSearch} from "react-icons/ci";
-import { CiShoppingCart } from "react-icons/ci";
+import { useState } from "react";
+import { CiSearch, CiShoppingCart } from "react-icons/ci";
+import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai"; // Icons for menu toggle
+
 const Navbar = () => {
+  const { data: session, status } = useSession();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const session = useSession()
+  const navItems = [
+    { title: "Home", path: "/" },
+    { title: "About", path: "/about" },
+    { title: "Services", path: "/services" },
+    { title: "My Bookings", path: "/mybooking" },
+    { title: "Contact", path: "/contact" },
+    { title: "Blog", path: "/blog" },
+  ];
 
-const navItem = [
-  {
-  title:"Home",
-  path: '/',
- },
- {
-  title:"About",
-  path: '/about',
- },
- {
-  title:"Services",
-  path: '/services',
- },
- {
-  title:"My Bookings",
-  path: '/mybooking',
- },
- {
-  title:"Contact",
-  path: '/contact',
- },
- {
-  title:"Blog",
-  path: '/blog',
- }
- 
+  return (
+    <div className="bg-[#bcc6bb] text-slate-900">
+      <div className="container mx-auto">
+        <div className="flex justify-between items-center py-0">
+          {/* Logo */}
+          <Link href="/">
+            <Image
+              className="rounded-full cursor-pointer"
+              alt="logo"
+              src="/assets/logo.webp"
+              height={60}
+              width={80}
+            />
+          </Link>
 
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center space-x-6">
+            {navItems.map((nav) => (
+              <Link
+                key={nav.path}
+                href={nav.path}
+                className="font-semibold hover:text-red-900"
+              >
+                {nav.title}
+              </Link>
+            ))}
+          </div>
 
-]
-    return (
-     <div className="bg-[#bcc6bb] text-slate-900 ">
-         <div className="navbar  container mx-auto  overflow-auto">
-        <div className="navbar-start">
-           {/* <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h8m-8 6h16" />
-              </svg>
+          {/* Icons and Buttons */}
+          <div className="hidden lg:flex items-center space-x-4">
+            <CiShoppingCart className="text-2xl hover:text-cyan-500 cursor-pointer" />
+            <CiSearch className="text-2xl hover:text-cyan-500 cursor-pointer" />
+            <a className="btn btn-outline btn-primary px-6">APPOINTMENT</a>
+            {status === "loading" && <h6>Loading....</h6>}
+            {status === "unauthenticated" && (
+              <Link href="/login" className="btn btn-primary px-8">
+                Login
+              </Link>
+            )}
+            {status === "authenticated" && (
+              <button
+                className="btn btn-outline btn-ghost px-8"
+                onClick={() => signOut()}
+              >
+                Logout
+              </button>
+            )}
+          </div>
+
+          {/* Mobile Menu Button */}
+          <div className="lg:hidden">
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="text-3xl"
+            >
+              {isMobileMenuOpen ? <AiOutlineClose /> : <AiOutlineMenu />}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Navigation */}
+        {isMobileMenuOpen && (
+          <div className="lg:hidden flex flex-col space-y-4 mt-2">
+            {navItems.map((nav) => (
+              <Link
+                key={nav.path}
+                href={nav.path}
+                className="block text-center font-semibold hover:text-red-900"
+                onClick={() => setIsMobileMenuOpen(false)} // Close menu on link click
+              >
+                {nav.title}
+              </Link>
+            ))}
+
+            <div className="flex justify-center space-x-4 mt-4">
+              <CiShoppingCart className="text-2xl hover:text-cyan-500 cursor-pointer" />
+              <CiSearch className="text-2xl hover:text-cyan-500 cursor-pointer" />
             </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-              <li><a>Item 1</a></li>
-              <li>
-                <a>Parent</a>
-                <ul className="p-2">
-                  <li><a>Submenu 1</a></li>
-                  <li><a>Submenu 2</a></li>
-                </ul>
-              </li>
-              <li><a>Item 3</a></li>
-            </ul>
-          </div>  */}
 
+            <div className="flex justify-center mt-4">
+              <a className="btn btn-outline btn-primary px-6">APPOINTMENT</a>
+            </div>
 
-<Link href="/">
-  <Image className="rounded-full" alt="logo" src="/assets/logo.webp" height={60} width={80} />
-</Link>
-        
-        </div>
-        <div className="navbar-center hidden lg:flex">
-        <div className="flex items-center space-x-6">
-          {
-         navItem.map((nav)=>(
-           <Link className="font-semibold hover:text-red-900" href={nav.path} key={nav.path}>{nav.title}</Link>
-         ))
-          }
-          
-        </div>
-        </div>
-        <div className="navbar-end">
-     <div className=" flex  items-center space-x-3">
-     <CiShoppingCart  className="text-2xl hover:text-cyan-500" />
-          <CiSearch className="text-2xl hover:text-cyan-500"/>
-          <a className="btn btn-outline btn-primary px-6">APPOINTMENT</a>
-          { session?.status === 'loading' &&
-            <h6>Loading....</h6>
-            }
-          { session?.status === 'unauthenticated' &&
-            <Link href="/login" className="btn btn-primary px-8">Login</Link>
-            }
-          { session?.status === 'authenticated' &&
-            <button className="btn btn-outline btn-ghost px-8" onClick={() => signOut()}>Logout</button>
-            }
-         
-     </div>
-        </div>
+            <div className="flex justify-center mt-4">
+              {status === "loading" && <h6>Loading....</h6>}
+              {status === "unauthenticated" && (
+                <Link href="/login" className="btn btn-primary px-8">
+                  Login
+                </Link>
+              )}
+              {status === "authenticated" && (
+                <button
+                  className="btn btn-outline btn-ghost px-8"
+                  onClick={() => signOut()}
+                >
+                  Logout
+                </button>
+              )}
+            </div>
+          </div>
+        )}
       </div>
-     </div>
-    );
+    </div>
+  );
 };
-
-
 
 export default Navbar;

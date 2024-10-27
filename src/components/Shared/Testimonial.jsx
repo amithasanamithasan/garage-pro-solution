@@ -10,18 +10,36 @@ const Testimonial = () => {
     const testimonials = [
         {
           id: 1,
-          name: "Awlad Hossain",
+          name: "Amit Hasan ",
           position: "Businessman",
-          image: "", // Replace with actual image path
+          image: "/assets/client.jpg", // Replace with actual image path
           quote:
             "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don’t look even slightly believable.",
           rating: 5,
         },
         {
           id: 2,
-          name: "Awlad Hossain",
+          name: "Faysal ",
           position: "Businessman",
-          image: "", // Replace with actual image path
+          image: "/assets/client.jpg", // Replace with actual image path
+          quote:
+            "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don’t look even slightly believable.",
+          rating: 5,
+        },
+        {
+          id: 3,
+          name: "Faysal ",
+          position: "Businessman",
+          image: "/assets/client.jpg", // Replace with actual image path
+          quote:
+            "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don’t look even slightly believable.",
+          rating: 5,
+        },
+        {
+          id: 4,
+          name: "Faysal ",
+          position: "Businessman",
+          image: "/assets/client.jpg", // Replace with actual image path
           quote:
             "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don’t look even slightly believable.",
           rating: 5,
@@ -58,11 +76,13 @@ const Testimonial = () => {
           {testimonials.map((testimonial) => (
             <SwiperSlide key={testimonial.id}>
               <div className="p-6 bg-white border rounded-lg shadow-md flex flex-col items-center text-left">
-                <Image
-                  src={''}
-                  alt={testimonial.name}
-                  className="w-16 h-16 rounded-full mb-4"
-                />
+              <Image
+  src={'/assets/client.jpg'}
+  alt={testimonial.name}
+  width={64}  // Add the width
+  height={64} // Add the height
+  className="w-16 h-16 rounded-full mb-4"
+/>
                 <h3 className="text-xl font-semibold text-gray-800">
                   {testimonial.name}
                 </h3>

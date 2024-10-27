@@ -1,5 +1,6 @@
+"use client";
 import React from 'react';
-
+import { LuCalendarDays } from "react-icons/lu";
 const location = () => {
     return (
         <div class="bg-black text-white p-8 rounded-lg flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0 md:space-x-8">
@@ -7,9 +8,10 @@ const location = () => {
         <div class="flex items-center space-x-4">
           <div class="text-red-500 text-3xl">
        
-            <i class="far fa-calendar-alt"></i>
+          <LuCalendarDays className='text-5xl bg-white'/>
           </div>
           <div>
+         
             <p class="text-sm">We are open monday-friday</p>
             <p class="text-lg font-bold">7:00 am - 9:00 pm</p>
           </div>
