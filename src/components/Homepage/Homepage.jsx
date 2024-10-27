@@ -3,7 +3,7 @@ import Banner from './Banner';
 import About from './About';
 import Footer from '../Shared/Footer';
 import Services from './Services';
-import Location from '../Shared/location'
+
 import PopulerProducts from '../Shared/PopulerProducts';
 import TeamSection from '../Shared/TeamSection';
 import CoreFeatures from '../Shared/CoreFeatures';
@@ -14,7 +14,6 @@ const Homepage = () => {
      <Banner></Banner>
      <About></About>
      <Services></Services>
-     <Location></Location>
      <PopulerProducts></PopulerProducts>
      <TeamSection></TeamSection>
      <CoreFeatures></CoreFeatures>
