@@ -14,41 +14,39 @@ const LoginPage = () => { // Updated component name to be uppercase
   const router = useRouter();
  const searchParams= useSearchParams();
  const path = searchParams.get('redirect')
-  const handleLogin = async (event) => {
-    event.preventDefault();
-    
-    const email = event.target.email.value;
-    const password = event.target.password.value;
-  
-    const resp = await signIn("credentials", {
+ const handleLogin = async (event) => {
+  event.preventDefault();
+
+  const email = event.target.email.value;
+  const password = event.target.password.value;
+
+  try {
+    const response = await signIn("credentials", {
       email,
       password,
-      redirect: true,  // Use redirect: pathname 
-     callbackUrl:path ? path : '/',
+      redirect: true, // This should handle the redirection
+      callbackUrl: path ? path : '/', // Fallback to homepage if no redirect path
     });
-  
+
     // Log the response
-    console.log('SignIn Response:', resp);
-  
-    if (resp?.status === 200) {
-      router.push('/');
-    } else {
-      console.log('Login failed:', resp?.error);
-    }
-  };
+    console.log('SignIn Response:', response);
+  } catch (error) {
+    console.error('Login failed:', error);
+  }
+};
   return (
     <div className="container px-6 md:px-24 mx-auto py-12 md:py-24">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
 
         {/* Image Section */}
         <div className="flex justify-center md:justify-start">
-          <Image
-            src="/assets/images/login/login.svg"
-            height={400}
-            width={400}
-            alt="login image"
-            className="w-full h-auto max-w-xs md:max-w-md"
-          />
+        <Image
+  src="/assets/images/login/login.svg"
+  height={400}
+  width={400}
+  alt="login image"
+  className="w-full h-auto max-w-xs md:max-w-md"
+/>
         </div>
 
         {/* Form Section */}
